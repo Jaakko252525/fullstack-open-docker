@@ -1,0 +1,6 @@
+> write-out .\script-answers\egg-12.3.txt "root@730ea1dc6298:/# history
+>>     1  apt-get update
+>>     2  apt-get -y install nano
+>>     3  nano /usr/src/app/index.js
+"wrote "console.log('Hello World')" with nano
+>>     4  history"
