@@ -1,0 +1,15 @@
+root@730ea1dc6298:/usr/src/app# history        
+    1  mkdir /usr/src/app/index.js
+    2  mkdir /usr/
+    3  cd usr
+    4  ls
+    5  cd src
+    6  cd app
+    7  mkdir app
+    8  clear
+    9  ls
+   10  cd app/
+   11  touch index.js
+   12  ls
+   13  stop-transcript
+   14  history
