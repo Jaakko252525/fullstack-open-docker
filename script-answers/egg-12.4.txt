@@ -1,0 +1,14 @@
+    6  curl -sL https://deb.nodesource.com/setup_20.x | bash
+    7  apt install -y nodejs
+    8  clear
+    9  cd usr/
+   10  src/app/
+   11  node index.js
+   12  clear
+   13  cd app
+   14  cd src
+   15  clear
+   16  cd app
+   17  clear
+   18  node index.js
+   19  history
