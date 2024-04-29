@@ -5,6 +5,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+.env
+/env
+
+mongo_data/*
+!mongo_data/other_subdirectory/
+
+
 # Runtime data
 pids
 *.pid
