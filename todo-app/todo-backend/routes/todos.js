@@ -49,11 +49,45 @@ singleRouter.get('/', async (req, res) => {
 });
 
 /* PUT todo. */
-singleRouter.put('/', async (req, res) => {
-  res.sendStatus(405); // Implement this
+singleRouter.put('/change', async (req, res) => {
+  try {
+    console.log('heere 1')
+    // get parameters
+    const { id, text } = req.body
+    // finding the todo
+    let todo_1 = await req.todo.findOne({ id });
+    // updating the specific todo
+    await req.todo.findByIdAndUpdate(id, { text });
+    // save todo changed
+    await todo_1.save()
+
+
+    // fetch updated todo
+    let newT = await req.todo.findOne({ id });
+    if (!newT) {
+      res.send(newT);
+
+    } else {
+      return res.sendStatus(405); // Implement this
+    }
+  
+  }catch(e) {
+    console.log()
+    console.log('errer:', '\n', e)
+  }
+
+
 });
 
 router.use('/:id', findByIdMiddleware, singleRouter)
 
 
 module.exports = router;
+
+
+
+
+
+
+
+
