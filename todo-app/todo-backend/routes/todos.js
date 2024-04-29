@@ -49,18 +49,21 @@ singleRouter.get('/', async (req, res) => {
 });
 
 /* PUT todo. */
-singleRouter.put('/change', async (req, res) => {
+singleRouter.put('/change/:id', async (req, res) => {
   try {
     console.log('heere 1')
     // get parameters
-    const { id, text } = req.body
+    const { text } = req.body
+    const { id } = req.params
+
+    console.log('text:', text)
+
     // finding the todo
     let todo_1 = await req.todo.findOne({ id });
     // updating the specific todo
     await req.todo.findByIdAndUpdate(id, { text });
     // save todo changed
     await todo_1.save()
-
 
     // fetch updated todo
     let newT = await req.todo.findOne({ id });
@@ -75,9 +78,9 @@ singleRouter.put('/change', async (req, res) => {
     console.log()
     console.log('errer:', '\n', e)
   }
-
-
 });
+
+
 
 router.use('/:id', findByIdMiddleware, singleRouter)
 
