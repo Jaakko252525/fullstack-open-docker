@@ -4,8 +4,16 @@ const router = express.Router();
 
 /* GET todos listing. */
 router.get('/', async (_, res) => {
-  const todos = await Todo.find({})
-  res.send(todos);
+
+  console.log('inside todos')
+
+  try {
+    const todos = await Todo.find({})
+    res.send(todos);
+  } catch(e) {
+      res.send(e)
+  }
+
 });
 
 /* POST todo to listing. */
@@ -20,21 +28,21 @@ router.post('/', async (req, res) => {
 const singleRouter = express.Router();
 
 const findByIdMiddleware = async (req, res, next) => {
-  const { id } = req.params
 
-  req.todo = await Todo.findById(id)
-  console.log('')
-  console.log('inside the id endpoit')
-  console.log('found the shit:', req.todo)
-  console.log('')
+  console.log('inside GET endpoint')
 
-  if (!req.todo) return res.sendStatus(404);
+  try {
+    const { id } = req.params
+    req.todo = await Todo.findById(id)
 
-  const todo = await Todo.findById(id)
+    if (!req.todo) return res.sendStatus(404);
 
-  res.send(todo);
+    // cant put code aftes the res.send
+    res.send(req.todo);
+  } catch(e) {
+      res.send(e)
+  }
 
-  next()
 }
 
 /* DELETE todo. */
@@ -48,8 +56,11 @@ singleRouter.get('/', async (req, res) => {
   res.sendStatus(405); // Implement this
 });
 
+
 /* PUT todo. */
-singleRouter.put('/change/:id', async (req, res) => {
+singleRouter.put('/:id', async (req, res) => {
+
+  console.log('inside PUT')
   try {
     console.log('heere 1')
     // get parameters
@@ -60,24 +71,20 @@ singleRouter.put('/change/:id', async (req, res) => {
 
     // finding the todo
     let todo_1 = await req.todo.findOne({ id });
+
+    console.log('found this obj:', todo_1)
     // updating the specific todo
-    await req.todo.findByIdAndUpdate(id, { text });
-    // save todo changed
-    await todo_1.save()
+    await Todo.findByIdAndUpdate(id, { text })
 
-    // fetch updated todo
-    let newT = await req.todo.findOne({ id });
-    if (!newT) {
-      res.send(newT);
-
-    } else {
-      return res.sendStatus(405); // Implement this
-    }
+    res.send('workt');
   
-  }catch(e) {
+   }catch(e) {
     console.log()
-    console.log('errer:', '\n', e)
+    console.log('error:', '\n', e)
+    return res.sendStatus(405); // Implement this
+
   }
+
 });
 
 
