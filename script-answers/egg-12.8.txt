@@ -1,0 +1,40 @@
+    1  mongosh
+    2  mongo -u root -p "example" the_database
+    3  mongosh -u root -p "example" the_database
+    4  xit
+    5  exit
+    6  mongosh
+    7  mongosh
+    8  exit
+    9  mongosh
+   10  exit
+   11  echo 'hello world'
+   12  ls
+   13  mongosh
+
+
+then ran:
+
+- the_database> db.auth("the_username", "the_password")
+{ ok: 1 }
+
+- db.todos.insertOne({text: "hello from CLI", done: false})
+
+- the_database> db.todos.find()
+[
+  {
+    _id: ObjectId('662fa3b944d1a9668a2202d8'),
+    text: 'Write code',
+    done: true
+  },
+  {
+    _id: ObjectId('662fa3b944d1a9668a2202d9'),
+    text: 'Learn about containers',
+    done: false
+  },
+  {
+    _id: ObjectId('66374603da7a038ca82202da'),
+    text: 'hello from CLI',
+    done: false
+  }
+]
