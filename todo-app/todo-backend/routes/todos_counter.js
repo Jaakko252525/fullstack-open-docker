@@ -22,12 +22,18 @@ const get = router.get('', async(req, res) => {
         const key = 'todosAmount'
         const dataLen = data.length
 
-        await setAsync(key, dataLen)
+        if (dataLen === undefined) {
+            await setAsync(key, dataLen)
+
+        }
 
         if(!data) return res.send('no todos')
-
+    
         const getAsyncData = await getAsync(key)
         const todoAmountAndString = 'Todos:' + getAsyncData
+
+
+
         
         res.send(todoAmountAndString)
         
