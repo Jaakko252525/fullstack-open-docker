@@ -17,11 +17,22 @@ const router = express.Router();
 const get = router.get('', async(req, res) => {
 
     
+    console.log('todos counter')    
     const data = await Todo.find({})
 
     const key = 'todos'
+    const dataLen = 'mockdata'
 
-    await setAsync(key, data.length)
+    console.log('key and dataLen', key, dataLen)
+
+    try{
+        await setAsync('key', 'dataLen')
+        console.log('setted async store')
+    }catch(err) {
+
+        console.log('errrrr:', err)
+    }
+
     
 
     if(!data) return res.send('no todos')
@@ -29,10 +40,10 @@ const get = router.get('', async(req, res) => {
     const getAsyncData = await getAsync(key)
     
     console.log('daada:', getAsyncData)
+    
 
 
-    res.send(data)
-
+    res.send("hello world")
 
 })
 

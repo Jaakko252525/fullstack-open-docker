@@ -10,7 +10,11 @@ router.get('/', async (_, res) => {
   console.log('inside todos')
 
   try {
+    console.log('inside try')
+
     const todos = await Todo.find({})
+
+    console.log('todos found:', todos)
     res.send(todos);
   } catch(e) {
       res.send(e)

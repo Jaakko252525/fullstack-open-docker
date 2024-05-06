@@ -15,5 +15,9 @@ services:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./mongo_data:/data/db
 
-  redis:
-    image: redis
+  some-redis:
+    image: redis:alpine
+    container_name: some-rediss
+    restart: unless-stopped
+    ports:
+      - 6379:6379
