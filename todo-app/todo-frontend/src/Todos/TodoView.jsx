@@ -34,13 +34,22 @@ const TodoView = () => {
     refreshTodos()
   }
 
-  return (
-    <>
-      <h1>Todos</h1>
-      <Form createTodo={createTodo} />
-      <List todos={todos} deleteTodo={deleteTodo} completeTodo={completeTodo} />
-    </>
-  )
+  if (todos) {
+    return (
+      <>
+        <h1>Todos</h1>
+        <Form createTodo={createTodo} />
+        <List todos={todos} deleteTodo={deleteTodo} completeTodo={completeTodo} />
+      </>
+    )
+
+  } else {
+    <div>
+      <h1>No todos</h1>
+    </div>
+  }
+
+
 }
 
 export default TodoView
