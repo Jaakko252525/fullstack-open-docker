@@ -28,16 +28,24 @@ services:
     volumes: 
       - ./todo-app/todo-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./todo-app/todo-backend/mongo_data:/data/db
+    container_name: mongo
 
-  some-redis:
+
+
+
+  redis:
     image: redis:alpine
-    container_name: some-rediss
     restart: unless-stopped
     ports:
       - 6379:6379
     command: ['redis-server', '--appendonly', 'yes'] # Overwrite the CMD
     volumes: # Declare the volume
       - ./todo-app/todo-backend/redis_data:/data
+    container_name: redis
+
+
+
+
 
   backend:
     image: hello-backend-dev
@@ -50,14 +58,12 @@ services:
       - 3000:3000
     container_name: hello-backend-dev # This will name the container hello-front-dev
     environment: 
-      - REDIS_URL=redis://127.0.0.1:6379
-      - MONGO_URL=mongodb://the_username:the_password@localhost:27017/the_database
+      - REDIS_URL=redis://redis:6379
+      - MONGO_URL=mongodb://the_username:the_password@mongo:27017/the_database
       
-
 
   nginx:
     image: nginx:1.20.1
-
     volumes:
       - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
     ports:

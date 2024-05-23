@@ -16,8 +16,13 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 
-app.use('/', indexRouter);
-app.use('/todos', todosRouter);
-app.use('/todoCounter', todo_counter_router)
+const router = express.Router()
 
+
+
+router.use('/', indexRouter);
+router.use('/todos', todosRouter);
+router.use('/todoCounter', todo_counter_router)
+
+app.use('/api', router)
 module.exports = app;
