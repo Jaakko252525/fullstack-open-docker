@@ -9,6 +9,8 @@ COPY package*.json ./
 # Install npm dependencies
 RUN npm install
 
+
+EXPOSE 80
 # Copy the rest of the application code to the working directory
 COPY . .
 
